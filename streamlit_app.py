@@ -31,10 +31,11 @@ if ingredients_list:
  ingredients_string = ''
  for fruit_chosen in ingredients_list:
      ingredients_string += fruit_chosen + ' '
- smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
- #st.text(smoothiefroot_response.json()) #Make Response 200 calls from api readable in json format
- #Below statement converts the data into table format
- sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+     st.subheader(fruit_chosen + ' Nutrition Information')
+     smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+fruit_chosen)
+     #st.text(smoothiefroot_response.json()) #Make Response 200 calls from api readable in json format
+     #Below statement converts the data into table format
+     sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
  #st.write(ingredients_string) 
  my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             values ('""" + ingredients_string + """','""" + name_on_order + """')"""
